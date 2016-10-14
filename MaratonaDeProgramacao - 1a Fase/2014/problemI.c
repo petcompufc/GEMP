@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-bool isPrime(int n){
+bool isPrime(long long n){
     if (n <= 1)
         return false;
     else if (n <= 3)
@@ -15,12 +15,12 @@ bool isPrime(int n){
         return true;
 }
 
-int calcularTotiente(int n)
+long long calcularTotiente(int n)
 {
-	int primos[1230];
+	long long primos[6000];
 
-	int k = 0, i = 3;
-	while(k < 1230) {
+	long long k = 0, i = 3;
+	while(k < 6000) {
 		if(isPrime(i))
 			primos[k++] = i;
 		i++;
@@ -42,11 +42,11 @@ int calcularTotiente(int n)
 
 int main()
 {
-	int n, e, c;
-	int d = 1, message = 1;
-	int totiente;
+	long long n, e, c;
+	long long d = 1, message = 1;
+	long long totiente;
 
-	scanf("%d %d %d", &n, &e, &c);
+	scanf("%lld %lld %lld", &n, &e, &c);
 
 	totiente = calcularTotiente(n);
 	
@@ -56,7 +56,7 @@ int main()
 	for(int i = 0; i < d; i++)
 		message = (message * c) % n;
 
-	printf("%d\n", message);
+	printf("%lld\n", message);
 
 	return 0;
 }
