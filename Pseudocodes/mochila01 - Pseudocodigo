@@ -1,0 +1,27 @@
+
+Algoritmo: mochila01
+Entrada: vetores v[1..n] e w[1..n], e inteiro W
+Pré-condição: (1) para "i" em {1..n}, v[i] e w[i] correspondem, respectivamente, ao
+				  valor e peso de um item "i"
+Saída: um número "K"
+Pós-condição: "K" é o maior lucro possível para os itens selecionados
+-----------------------------------------------------------------------------------
+01. | PARA i DE 1 A n
+02. |  | MV[i,0] := 0
+03. | PARA c DE 1 A W
+04. |  | SE w[1] <= c
+05. |  |  | MV[1,c] := v[1]
+06. |  | SENAO
+07. |  |  | MV[1,c] := 0
+08. | PARA i DE 2 A n
+09. |  | PARA c DE 1 A W
+10. |  |  | SE c <= w[i]
+11. |  |  |  | MV[i,c] := MV[i-1, c]
+12. |  |  | SENAO
+13. |  |  |  | vi := MV[i-1, c-w[i]] + v[i]
+14. |  |  |  | vn := MV[i-1, c]
+15. |  |  |  | SE vi < vn
+16. |  |  |  |  | MV[i,c] := vn
+18. |  |  |  | SENAO
+19. |  |  |  |  | MV[i,c] := vi
+20. | RETORNE MV[n,w]

@@ -1,0 +1,16 @@
+
+Algoritmo: rodCut
+Entrada: vetor P[1..n]
+Pré-condição: (1) P[i] equivale ao preço (em R$) do corte de tamanho "i"
+			  (2) O tamanho total da Haste é igual a "n"
+Saída: um número "K"
+Pós-condição: "K" é o maior lucro possível com os cortes determinados
+-----------------------------------------------------------------------------------
+1. | S[1] := P[1]
+2. | PARA i DE 2 A n
+3. |  | S[i] := P[i]
+4. |  | PARA j DE 1 A (i/2)
+5. |  |  | vc := P[j] + S[i-j]
+6. |  |  | SE S[i] < vc
+7. |  |  |  | S[i] := vc
+8. | RETORNE S[n]

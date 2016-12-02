@@ -1,0 +1,21 @@
+
+Algoritmo: Selection_Sort
+Entrada: um vetor A[1..n]
+Pré-condição: N >= 0
+Saída: nenhuma
+Pós-condição: A[1..n] está ordenado.
+------------------------------------------------
+1. | PARA i DE 1 A n-1
+2. |  | menor := i
+3. |  | PARA j DE i A n
+4. |  |  | SE A[j] < A[i]
+5. |  |  |  | menor := A[j]
+6. |  | aux := V[i]
+7. |  | V[i] := V[menor]
+8. |  | V[menor] := aux
+
+
+Legenda:
+
+  "|"  ->  Escopo de Hidentação 
+  ":="  ->  Atribuição

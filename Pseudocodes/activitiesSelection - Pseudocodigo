@@ -1,0 +1,16 @@
+
+Algoritmo: activitiesSelection
+Entrada: vetores C[1..n], F[1..n] e S[1..n]
+Pré-condição: (1) para todo 'i' em {1,...,n}, C[i] e F[i] correspondem, 
+				  respectivamente, aos horarios de inicio e fim da atividade "i" 
+			  (2) F[1..n] está em ordem crescente
+Saída: nenhuma
+Pós-condição: (1) S[i] == 1 implica na atividade C[i]/F[i] ser escolhida
+			  (2) S[i] == 0 implica na atividade C[i]/F[i] ser descartada
+-----------------------------------------------------------------------------------
+1. | S[1] := 1, ultimo := 1
+2. | PARA i DE 2 A n
+3. |  | SE c[j] < f[ultimo]
+4. |  |  | S[j] := 0
+5. |  | SENAO
+6. |  |  | S[j] := V; ultimo := j
