@@ -258,9 +258,8 @@
 	}
 
 	int main() {		
-		
-		create_graph();				
-		
+		;
+		create_graph();		
 		return 0;
 	}
 
