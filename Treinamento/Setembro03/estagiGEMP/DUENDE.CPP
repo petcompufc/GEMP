@@ -8,9 +8,11 @@
 
 	using namespace std;
 
-	int n, m, s, pmax, teste=1;
-	int *saida;
-
+	int n, m;
+	
+	int start, *saidas;
+	int ** caverna;
+	
 	struct edge
 	{
 		int u;			//incident vertex
@@ -159,11 +161,11 @@
 		L.ActualSize = 0;
 	}
 
-	void BFS(Adj_list L[], int u, int n){
+	void BFS(Adj_list L[], int u, int num){
 		//cout << "\n\n";
 		//cout << "Starting BFS algorithm.\n";
 
-		int size = n;
+		int size = num;
 		int* color = new int [size];
 		int* dis   = new int [size];
 		int* pi    = new int [size];
@@ -200,66 +202,127 @@
 			color[aux] = 2;
 		}
 
-		int k = 0;
+		int menor = dis[0];
 
 		for(int i = 0; i < size; i++){
-
-			if(dis[i] <= pmax and  i != s-1){
-				saida[k] = i+1;
-				k++;
+			if(saidas[i] == -1 ){
+				cout << menor << endl;
+				return;
 			}
+			if(dis[saidas[i]] < menor) menor = dis[saidas[i]];
 		}
 
-	}
+		cout << menor << endl;
 
+
+
+	}
 
 	Adj_list* Graph;
 
-	void create_graph(){
-
-
-		cin >> n >> m >> s >> pmax;
-
-		while(n!=0){
-
-			saida = new int[n];
-			Graph = new Adj_list [n];
-			for(int i = 0; i < n; i++){
-				Init_G(Graph[i]);
-				saida[i] = -1;
-			}	
-			
-			int row, column;
-			double weight;
-
-			for(int i=0; i<m; i++){
-				cin >> row >> column;
-				G_add_end(Graph[row-1], column, 1);
-				G_add_end(Graph[column-1], row, 1);
-				
-			}
-
-			BFS(Graph, s, n);
-
-			cout << "Teste " << teste++ <<endl;
-
-			for(int i = 0; i < n; i++){
-				if(saida[i]!=-1){
-					cout << saida[i] << " ";
+	void Init_grid(Adj_list L[], int i, int j, int node){
+		if (caverna[i][j] != 2){	
+			cout << "flag2!!!\n"	;;	
+			//esquerda
+			if(j-1 >= 0){
+				if (caverna[i][j-1] != 2)
+				{
+					G_add_end(Graph[node], node-1, 1);
+					G_add_end(Graph[node-1], node, 1);
 				}
-				else break;
-				
 			}
-			cout << "\n\n";
-
-			cin >> n >> m >> s >> pmax;
+			//direita
+			if(j+1 < m)
+				if (caverna[i][j+1] != 2)
+				{
+					G_add_end(Graph[node], node+1, 1);
+					G_add_end(Graph[node+1], node, 1);
+				}
+			//cima
+			if(i-1 >= 0){
+				if (caverna[i-1][j] != 2){
+					G_add_end(Graph[node], node-m, 1);
+					G_add_end(Graph[node-m], node, 1);
+				}
+			}
+			//baixo
+			if(i+1 < n){
+				if (caverna[i-1][j] != 2)
+				{
+					G_add_end(Graph[node], node+m, 1);
+					G_add_end(Graph[node+m], node, 1);
+				}
+			}
+			cout << "flag3!!!\n"	;;			
+			
 		}
+
+		return;
+	}	
+
+	void create_graph(const char* filename){
+
+		ifstream dados(filename, ifstream::in);
+
+		dados >> n >> m;
+
+		Graph = new Adj_list [n*m];
+		for(int i = 0; i < n*m; i++){
+			Init_G(Graph[i]);				
+		}
+
+		caverna = new int* [n];
+		saidas = new int [n*m];
+
+		for(int i = 0; i < n; i++){
+			caverna[i] = new int [m] ;
+			saidas[i] = -1;				
+		}			
+		
+
+		int k = 0, aux = 0;
+		 
+
+		for(int i=0; i < n; i++){
+			for (int j = 0; j < m; ++j){
+				dados >> caverna[i][j];					
+				if(caverna[i][j] == 3) start = k;
+				if(caverna[i][j] == 0) saidas[aux++] = k;
+				k++;
+			}				
+		}
+		for(int i=0; i < n; i++){
+			for (int j = 0; j < m; ++j){
+				cout << caverna[i][j] << " ";									
+			}
+			cout << endl;				
+		}
+
+		k = 0;
+		cout << "teste novo!!!\n"	;	
+		for(int i = 0; i < n*m; i++){
+			if (i > 0) G_add_end(Graph[i], i-1, 1);				
+		}
+		cout << "teste nvov!!!\n"	;	
+
+		cout << "flag!!!\n"	;	
+		for(int i = 0; i < n; i++){
+			for (int j = 0; j < m; ++j){
+				Init_grid(Graph, i, j, k);
+				k++;				
+			}				
+		}
+
+
+
+		cout << "flag4!!!\n"	;
+		BFS(Graph, start, n*m);
 
 	}
 
-	int main() {		
-		;
-		create_graph();		
+	int main(int argc, char *argv[]) {		
+		
+		create_graph(argv[1]);		
 		return 0;
 	}
 
