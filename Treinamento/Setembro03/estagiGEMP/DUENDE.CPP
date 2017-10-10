@@ -222,43 +222,59 @@
 
 	void Init_grid(Adj_list L[], int i, int j, int node){
 		if (caverna[i][j] != 2){	
-			cout << "flag2!!!\n"	;;	
+			
 			//esquerda
-			if(j-1 >= 0){
+			if(j!=0){
+				//cout << "Dentro da esquerda j: " << j << endl;
 				if (caverna[i][j-1] != 2)
 				{
+					//cout << node << " " << node-1 << endl;
 					G_add_end(Graph[node], node-1, 1);
-					G_add_end(Graph[node-1], node, 1);
+					//G_add_end(Graph[node-1], node, 1);
 				}
 			}
 			//direita
-			if(j+1 < m)
-				if (caverna[i][j+1] != 2)
-				{
+			if(j+1 <= m && j != (m-1) )
+				//cout << "Dentro da direita j: " << j << endl;
+				if (caverna[i][j+1] != 2){
 					G_add_end(Graph[node], node+1, 1);
-					G_add_end(Graph[node+1], node, 1);
+					//G_add_end(Graph[node+1], node, 1);
 				}
 			//cima
 			if(i-1 >= 0){
 				if (caverna[i-1][j] != 2){
 					G_add_end(Graph[node], node-m, 1);
-					G_add_end(Graph[node-m], node, 1);
+					//G_add_end(Graph[node-m], node, 1);
 				}
 			}
 			//baixo
 			if(i+1 < n){
-				if (caverna[i-1][j] != 2)
+				if (caverna[i+1][j] != 2)
 				{
-					G_add_end(Graph[node], node+m, 1);
-					G_add_end(Graph[node+m], node, 1);
+					G_add_end(Graph[node], node + m, 1);
+					//G_add_end(Graph[node + m ], node, 1);
 				}
 			}
-			cout << "flag3!!!\n"	;;			
+			
 			
 		}
 
 		return;
-	}	
+	}
+
+	void printGraph(Adj_list L[], int n){
+	for (int i = 0; i < n; i++){
+		edge* aux = L[i].front;
+		cout << "neighboors of " << i << ":\n";
+		while(aux!= NULL){
+			cout << "vertex " << aux->u << " with weight: " << aux->weight << "\n";
+			aux = aux->next;
+		}
+	}
+
+	cout << "\n\n";
+
+}	
 
 	void create_graph(const char* filename){
 
@@ -291,32 +307,19 @@
 				k++;
 			}				
 		}
-		for(int i=0; i < n; i++){
-			for (int j = 0; j < m; ++j){
-				cout << caverna[i][j] << " ";									
-			}
-			cout << endl;				
-		}
-
+		
 		k = 0;
-		cout << "teste novo!!!\n"	;	
-		for(int i = 0; i < n*m; i++){
-			if (i > 0) G_add_end(Graph[i], i-1, 1);				
-		}
-		cout << "teste nvov!!!\n"	;	
 
-		cout << "flag!!!\n"	;	
 		for(int i = 0; i < n; i++){
-			for (int j = 0; j < m; ++j){
+			for (int j = 0; j < m; j++){
 				Init_grid(Graph, i, j, k);
 				k++;				
 			}				
 		}
-
-
-
-		cout << "flag4!!!\n"	;
-		BFS(Graph, start, n*m);
+		//cout << k << endl;
+		printGraph(Graph, k);
+		//cout << start <<endl;
+		BFS(Graph, start+1, n*m);
 
 	}
 
