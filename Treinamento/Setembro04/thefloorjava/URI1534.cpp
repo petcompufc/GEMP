@@ -19,7 +19,7 @@ int main()
 	int n = 0;
 
 	while(cin >> array[i]) {
-		
+		cout << "Corgi" << endl;
 	}
 	
 	return 0;
