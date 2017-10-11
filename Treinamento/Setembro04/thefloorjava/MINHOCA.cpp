@@ -15,6 +15,7 @@ using namespace std;
 
 int main()
 {
+	cout << "Corgi" << endl;
 	
 	return 0;
 }
