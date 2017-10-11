@@ -15,6 +15,12 @@ using namespace std;
 
 int main()
 {
+	int array[24][24];
+	int n = 0;
+
+	while(cin >> array[i]) {
+		
+	}
 	
 	return 0;
 }
