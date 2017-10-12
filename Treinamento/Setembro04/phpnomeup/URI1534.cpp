@@ -64,7 +64,7 @@ int main(){
 
 
 
-/*
+/*   CODIGO DA DEBORA:
 int main()
 {
 	int n;
