@@ -13,8 +13,35 @@
 
 using namespace std;
 
-int main()
-{
+int main(){
+	int m, n, i, j, saida, somai, somaj;
+	scanf("%d %d" , &n, &m);
+	int area[n][m];
+
+	for (i = 0; i < n; i++){
+		for (j = 0; j < m; j++){
+			cin >> area[i][j];
+		}
+	}
+
+	saida = 0;
+	for (j = 0, somaj = 0; j < m; somaj = 0, j++){
+		for (i = 0; i < n; i++){
+			somaj += area[i][j];
+//			somai += area[j][i];
+		}
+
+		if (somaj>saida) saida = somaj;
+//		if (somai>saida) saida = somai;
+	}
+	for (i = 0, somai = 0; i < n; somai = 0, i++){
+		for (j = 0; j < m; j++){
+			somai += area[i][j];
+		}
+		if (somai>saida) saida = somai;
+	}
+
+	cout << saida;
 	
 	return 0;
 }
