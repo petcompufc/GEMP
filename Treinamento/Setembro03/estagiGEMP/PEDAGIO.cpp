@@ -1,9 +1,4 @@
 	#include <iostream>
-	#include <map>
-	#include <set>
-	#include <fstream>
-	#include <utility>
-	#include <limits>
 	#include <queue>
 
 	using namespace std;
@@ -27,38 +22,10 @@
 
 	};
 
-	int size 		(Adj_list L);
-	void destroy	(Adj_list &L);
-
-
-
 	void Init_G(Adj_list &L){
 		L.ActualSize = 0;
 		L.front	 = NULL;
 		L.end 	 = NULL;
-	}
-
-	void G_add_front(Adj_list &L, int u, double w){
-
-		edge* newE = new edge;
-		newE -> u 			= u;
-		newE -> weight  	= w;	
-		newE -> previus		= NULL;	
-
-		if(L.ActualSize == 0 ){
-			newE -> next	= NULL;
-			//newE -> previus = NULL;
-			L.front 		= newE;
-			L.end 			= newE;
-		}
-		else{
-			newE -> next 	   = L.front;
-			L.front -> previus = newE;
-			L.front 		   = newE;
-		} 
-
-		L.ActualSize++;
-
 	}
 
 	void G_add_end(Adj_list &L, int u, double w){
@@ -82,86 +49,7 @@
 		L.ActualSize++;
 	}
 
-	edge* G_reomve_front(Adj_list &L) {	
-		edge* value = new edge;
-
-		// standard values in case of empty graph
-		value -> next	 = NULL;
-		value -> previus = NULL;
-		value -> u 		= 999999; 		
-		value -> weight = 999999;
-
-		//if not empty
-		if (size(L)!=0){
-			//special case of size=1
-		    if ( size(L)==1){
-			    value -> u      = L.end->u;
-			    value -> weight = L.end->weight;
-			    destroy(L);
-		    }
-		    //general case
-			else{
-				value -> u      = L.front->u;
-			    value -> weight = L.front->weight;
-				edge* aux 		= L.front->next;
-				delete L.front;
-				L.front = aux;
-				--L.ActualSize;
-			}
-		}
-		
-		return value;
-	}
-
-	edge* G_remove_end(Adj_list &L) {
-		edge* value 	 = new edge;
-		// standard values in case of empty graph
-		value -> next	 = NULL;
-		value -> previus = NULL;	
-		value -> u 		 = 999999; 		
-		value -> weight  = 999999;
-
-		//if not empty
-		if (L.ActualSize > 0) {
-			value-> u 	   = L.end->u;
-			value-> weight = L.end->weight;
-
-			//special case of size=1
-			if (L.ActualSize == 1) {
-				delete L.end;
-				L.end = NULL;
-				L.front = NULL;
-			}
-			// Sgeneral case
-			else { 
-				edge *aux = L.end->previus;
-				delete L.end;
-				L.end = aux;
-				L.end->next = NULL;
-			}		
-			L.ActualSize--;
-		}
-
-		return value;
-	}
-
-
-	int size(Adj_list L) {
-		return L.ActualSize;
-	}
-
-	void destroy(Adj_list &L) {
-		while (L.front != NULL) {
-			edge *p  = L.front;
-			L.front = L.front->next;
-			delete p;
-		}
-		L.ActualSize = 0;
-	}
-
 	void BFS(Adj_list L[], int u, int n){
-		//cout << "\n\n";
-		//cout << "Starting BFS algorithm.\n";
 
 		int size = n;
 		int* color = new int [size];
@@ -212,7 +100,6 @@
 
 	}
 
-
 	Adj_list* Graph;
 
 	void create_graph(){
@@ -220,7 +107,7 @@
 
 		cin >> n >> m >> s >> pmax;
 
-		while(n!=0){
+		while(n != 0){
 
 			saida = new int[n];
 			Graph = new Adj_list [n];
@@ -229,8 +116,7 @@
 				saida[i] = -1;
 			}	
 			
-			int row, column;
-			double weight;
+			int row, column;			
 
 			for(int i=0; i<m; i++){
 				cin >> row >> column;
@@ -257,8 +143,7 @@
 
 	}
 
-	int main() {		
-		;
+	int main() {				
 		create_graph();		
 		return 0;
 	}
