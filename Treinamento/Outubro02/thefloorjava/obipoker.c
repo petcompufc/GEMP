@@ -50,6 +50,7 @@ int quadra(int* mao){
 		}
 	}
 
+	// verifica a quantidade de cartas no segundo vetor
 	if(j==1)
 		return mao[0];
 
@@ -70,6 +71,8 @@ int fullHouse(int* mao){
 	int i, j, igual, igual2 = 0, trinca = 0;
 	int tam = 5; // numero de cartas
 	int vetor[tam];
+
+	// verifica qual carta se repete 3 vezes
 	for(i=0; i<tam; i++){
 		igual = 0;
 		for(j=0; j<tam; j++){
@@ -83,6 +86,7 @@ int fullHouse(int* mao){
 		}
 	}
 
+	// verifica qual carta se repete 2 vezes
 	for(i=0; i<tam; i++){
 		for(j=0; j<tam; j++){
 			if((mao[i] != trinca) && (i != j)){
@@ -102,6 +106,8 @@ int trinca(int* mao){
 	int i, j, igual;
 	int tam = 5; // numero de cartas
 	int vetor[tam];
+
+	// verifica se há alguma carta que se repete 3 vezes
 	for(i=0; i<tam; i++){
 		igual = 0;
 		for(j=0; j<tam; j++){
@@ -123,6 +129,7 @@ int doisPares(int* mao){
 	int tam = 5; // numero de cartas
 	int vetor[tam];
 
+	// verifica qual carta se repete 2 vezes
 	for(i=0; i<tam; i++){
 		igual = 0;
 		for(j=0; j<tam; j++){
@@ -136,6 +143,7 @@ int doisPares(int* mao){
 		}
 	}
 
+	// verifica qual a outra carta que se repete 2 vezes
 	for(i=0; i<tam; i++){
 		for(j=0; j<tam; j++){
 			if((mao[i] != par) && (i != j)){
@@ -145,6 +153,7 @@ int doisPares(int* mao){
 		}
 	}
 
+	// retorna o maior par
 	if(par && par2)
 		return maior(par, par2);
 	return 0;
@@ -154,6 +163,8 @@ int par(int* mao){
 	int i, j, igual;
 	int tam = 5; // numero de cartas
 	int vetor[tam];
+
+	// verifica se há alguma carta que se repete uma vez
 	for(i=0; i<tam; i++){
 		igual = 0;
 		for(j=0; j<tam; j++){
@@ -210,6 +221,7 @@ int main(void){
 		else if(doisPares(mao)){
 			x = doisPares(mao);
 
+			// descarta o maior par da verificacao e analisa qual o segundo par
 			for(k=0; k<tam; k++){
 				for(j=0; j<tam; j++){
 					if((mao[k] != x) && (k != j)){
