@@ -40,30 +40,21 @@ int sequencia(int* mao){
 }
 
 int quadra(int* mao){
-	int i, j = 0;
+	int i, igual, j = 0;
 	int tam = 5; // numero de cartas
 	int vetor[tam];
-	for(i=1; i<tam; i++){
-		if(mao[0] != mao[i]){
-			vetor[j] = mao[i];
-			j++;
+	for(i=0; i<tam; i++){
+		igual = 0;
+		for(j=0; j<tam; j++){
+			if(j != i){
+				if(mao[i] == mao[j]){
+					igual++;
+					if(igual == 3)
+						return mao[i];
+				}
+			}
 		}
-	}
-
-	// verifica a quantidade de cartas no segundo vetor
-	if(j==1)
-		return mao[0];
-
-	if(j==4){
-		for(i=0; i<j; i++){
-			if(vetor[0] != vetor[i])
-				return 0;
-		}
-		return vetor[0];
-	}
-
-	else
-		return 0;
+	}	return 0;
 
 }
 
