@@ -15,7 +15,7 @@ using namespace std;
 
 
 int main(){
-    
+
     int n, i,j,x;
 
     while(cin >> n){
@@ -46,25 +46,7 @@ int main(){
     return 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*   CODIGO DA DEBORA:
+/*   CODIGO DO JONAS:
 int main()
 {
 	int n;
