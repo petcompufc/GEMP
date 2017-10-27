@@ -117,6 +117,21 @@
 
 		cout << endl;
 
+		if (u-1 == start){
+			for (int i = 0; dirty[i] != -1; ++i){
+				if (dis[dirty[i]] == 9999999){
+					cout << -1 << endl;
+					exit (EXIT_FAILURE);
+				}
+			}			
+		}
+
+		for (int i = 0; dirty[i] != -1; ++i){
+			G_add_end(Mask, u-1, dirty[i], dis[dirty[i]]);
+		}
+
+		if (u-1 == start) G_add_end(Mask, u-1, start, dis[start]);
+
 		for(int i = 0; i < 10; i++){
 			if(dirty[i] == -1 ){
 				cout << total << endl;
@@ -152,6 +167,9 @@
 		return;
 	}	
 
+	Adj_list *Mask;
+	int msk = 0;
+
 	void create_graph(){
 
 		Adj_list* Graph;
@@ -184,6 +202,10 @@
 				}				
 			}
 
+			Mask = new Adj_list [k];
+
+			for(int i = 0; i < n*m; i++) Init_G(Mask[i]);			
+
 			k = 0;
 			
 			for(int i = 0; i < n; i++){
@@ -193,6 +215,10 @@
 			}
 
 			BFS(Graph, start+1, n*m);
+
+			for (int i = 0; dirty[i] != -1; ++i){
+				BFS(Graph, dirty[i]+1, n*m);
+			}
 
 			delete Graph;
 
