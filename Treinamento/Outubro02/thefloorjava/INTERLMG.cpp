@@ -23,19 +23,10 @@ float eucDist(pair<float,float> po1, pair<float,float> po2) {
 	return sqrt(pow(po1.first-po2.first, 2) + pow(po1.second-po2.second, 2) );
 }
 
-void printGraph(const vector< vector<float> > &graph) {
-	for (int i = 0; i < graph.size(); ++i) {
-		for (int j = 0; j < graph[i].size(); ++j)
-				cout << graph[i][j] << "\t";
-		cout << endl;
-	}
-
-}
-
-int minKey(float key[], int N, bool mstSet[]) {
+int minKey(const vector<float> &key, const vector<bool> &mstSet) {
 	int min = INF, min_index;
 
-	for (int i = 0; i < N; ++i)
+	for (int i = 0; i < key.size(); ++i)
 		if(mstSet[i] == false && key[i] < min){
 			min = key[i]; min_index = i;
 		}
@@ -43,17 +34,10 @@ int minKey(float key[], int N, bool mstSet[]) {
 	return min_index;
 }
 
-void printMST(int parent[], const vector< vector<float> > &graph)
-{
-   cout << "Edge   Weight" << endl;
-   for (int i = 1; i < graph.size(); i++)
-      cout << parent[i] << " - " << i << "    " << graph[i][parent[i]] << endl;
-}
-
 void primMST(const vector< vector<float> > &graph) {
-     int parent[graph.size()];
-     float key[graph.size()];
-     bool mstSet[graph.size()];
+     vector<int> parent(graph.size());
+     vector<float> key(graph.size());
+     vector<bool> mstSet(graph.size());
  
      for (int i = 0; i < graph.size(); i++)
         key[i] = INF, mstSet[i] = false;
@@ -62,7 +46,7 @@ void primMST(const vector< vector<float> > &graph) {
      parent[0] = -1;
  
      for (int count = 0; count < graph.size()-1; count++) {
-        int u = minKey(key, graph.size(), mstSet);
+        int u = minKey(key, mstSet);
  
         mstSet[u] = true;
  
@@ -71,7 +55,7 @@ void primMST(const vector< vector<float> > &graph) {
              parent[v]  = u, key[v] = graph[u][v];
      }
  
-     printMST(parent, graph);
+     cout << graph[1][parent[1]] << endl;
 }
 
 int main() {
@@ -81,6 +65,7 @@ int main() {
 	vector< vector <float> > D;
 
 	while(cin >> N && N != 0) {
+		D.clear();
 		cidade.clear();
 		
 		D.resize(N);
@@ -95,8 +80,6 @@ int main() {
 		for (int i = 0; i < N; i++)	
 			for (int j = i+1; j < N; j++) 
 				D[i][j] = D[j][i] = eucDist(cidade[i], cidade[j]);
-
-		printGraph(D);
 
 		primMST(D);
 
