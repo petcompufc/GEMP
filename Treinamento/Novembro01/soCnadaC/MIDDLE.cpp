@@ -7,9 +7,9 @@
 	ATENÇÃO! Pedimos que não veja as dicas da Solução até ter quebrado bastante a cabeça tentando resolver o problema :)
 */
 
-#include <iostream>     // cout
-#include <algorithm>    // sort
-#include <vector>       // vector
+#include <iostream>     
+#include <algorithm>    
+#include <vector>       
 
 using namespace std;
 
