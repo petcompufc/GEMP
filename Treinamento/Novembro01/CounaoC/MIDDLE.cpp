@@ -10,10 +10,24 @@
 
 */
 #include <iostream>
+#include <algorithm> //sort
+#include <vector> // vector
 
 using namespace std;
 
 int main() {
+
+	int N, i, middle, aux;
+	vector<int> v;
+
+	cin >> N;
+	middle = N/2;
+	for (i = 0; i<N; i++){
+		cin >> aux;
+		v.push_back(aux);
+	}
+	sort(v.begin(), v.end());
+	cout << v[middle] << '\n';
 	
 	return 0;
 }
