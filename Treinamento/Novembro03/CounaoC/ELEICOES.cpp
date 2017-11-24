@@ -10,10 +10,35 @@
 
 */
 #include <iostream>
+#include <algorithm>
+#include <map>
 
 using namespace std;
 
 int main() {
+	int N;
+	int Xi;
+
+	map<int,int> mapa;
+
+	cin >> N;
+
+	for(int i = 0; i < N; ++i){
+		cin >> Xi;
+		mapa[Xi] = mapa[Xi] + 1;
+
+	}
+
+	pair<int,int> ganhador = *mapa.begin();
+	for(map<int,int>::iterator it = mapa.begin(); it!=mapa.end(); ++it){
+
+		if(it->second > ganhador.second){
+			ganhador = *it;
+		}
+	}
+
+	cout << ganhador.first << endl;
+
 	
 	return 0;
 }
