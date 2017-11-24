@@ -10,10 +10,32 @@
 
 */
 #include <iostream>
+#include <algorithm>
+#include <set>
+#include <string>
 
 using namespace std;
 
 int main() {
-	
+
+	int n;
+	string dna;
+	set<string> conj;
+
+
+	for(;;){
+		cin >> n;
+
+		if(!n){break;}
+
+		for(int i  = 1; i <= n; ++i){
+			cin >> dna;
+			sort(dna.begin(),dna.end());
+			conj.insert(dna);
+		}
+
+		cout << conj.size() << endl;
+		conj.clear();
+	}	
 	return 0;
 }
