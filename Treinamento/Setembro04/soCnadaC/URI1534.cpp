@@ -1,20 +1,37 @@
-/*
-	URI1534.cpp - (URI) 1534 - Array 123
-
-	Problema do Roteiro 0 - Primeiros Problemas
-	
-	Link Original do problema: https://www.urionlinejudge.com.br/judge/pt/problems/view/1534
-	Link para Dicas da Solução: http://wiki.maratona.dcc.ufmg.br/index.php/URI1534
-
-	ATENÇÃO! Pedimos que não veja as dicas da Solução até ter quebrado bastante a cabeça tentando resolver o problema :)
-
-*/
-#include <iostream>
-
-using namespace std;
+#include <stdio.h>
 
 int main()
 {
-	
+	int n;
+	while(scanf("%d",&n)!=EOF)
+	{
+		int v[n][n];
+		int i,j;
+		for ( i= 0; i < n; i++)
+		{
+			for (j = 0; j < n; j++)
+			{
+				v[i][j]=3;
+				if (i==j)
+				{
+					v[i][j]=1;
+				}
+				if (i+j==n-1)
+				{
+					v[i][j]=2;
+				}
+			}
+		}
+
+		for (i = 0; i < n; i++)
+		{
+			for (j = 0; j < n; j++)
+			{
+				printf("%d",v[i][j]);
+			}
+			printf("\n");
+		}
+
+	}
 	return 0;
 }
